@@ -1,0 +1,69 @@
+CREATE DATABASE SQLPRACTICE;
+
+USE SQLPRACTICE;
+
+CREATE TABLE SQLPRACTICE.user (
+    id int NOT NULL PRIMARY KEY, 
+    firstName varchar(50) NOT NULL, 
+    lastName varchar(50), 
+    age int, 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+    
+   
+ALTER TABLE SQLPRACTICE.user MODIFY COLUMN id INT AUTO_INCREMENT;
+   
+INSERT INTO SQLPRACTICE.user (age, firstName, lastName) VALUES 
+(72,	"Maria",	"Miller"),
+(8,	"Susan",	"Wilson"),
+(9,	"Margaret",	"Moore"),
+(10,	"Dorothy",	"Taylor"),
+(11,	"Lisa",	"Anderson"),
+(12,	"Nancy",	"Thomas"),
+(13, 	"Karen",	"Jackson"),
+(14,	"Betty",	"White"),
+(15,	"Helen",	"Harris"),
+(16,	"Sandra",	"Martin"),
+(17,	"Donna",	"Thompson"),
+(18,	"Carol",	"Garcia"),
+(19,	"Ruth",	"Martinez"),
+(20,	"Sharon",	"Robinson"),
+(21,	"Michelle",	"Clark"),
+(22, 	"Laura",	"Rodriguez"),
+(23,	"Sarah",	"Lewis"),
+(24,	"Kimberly",	"Lee"),
+(25,	"Deborah",	"Walker"),
+(26,	"Jessica",	"Hall"),
+(27,	"Shirley",	"Allen"),
+(28, 	"Cynthia",	"Young"),
+(29,	"Angela",	"Hernandez"),
+(30,	"Melissa",	"King"),
+(31,	"Brenda",	"Wright"),
+(32,	"Amy",	"Lopez"),
+(33,	"Anna",	"Hill");
+
+
+ALTER TABLE tbl ADD id INT PRIMARY KEY AUTO_INCREMENT;
+
+
+SELECT * FROM SQLPRACTICE.`user` u ORDER BY u.age  DESC LIMIT 10;
+
+
+SELECT * FROM SQLPRACTICE.`user` u  WHERE u.age < 28 ORDER BY u.age   DESC LIMIT 10;
+
+
+
+
+
+
+
+SELECT jobs.id, jobs.retailer_id,jobs.sale_id,jobs.job_status, jobs.created_at, jobs.updated_at, jobs.updated_by, job_agenda.estimated_minutes, job_agenda.scheduled_on FROM jobs 
+LEFT JOIN job_agenda ON jobs.id = job_agenda.job_id WHERE retailer_id = ? AND ((job_agenda.scheduled_on = (SELECT scheduled_on FROM job_agenda WHERE job_id = ?) AND id < ?) 
+OR job_agenda.scheduled_on < (SELECT scheduled_on FROM job_agenda WHERE job_id = ?) OR job_agenda.scheduled_on is NULL) AND job_status IN (?,?,?,?,?) 
+ORDER BY job_agenda.scheduled_on DESC, id DESC LIMIT 50
+
+
+
+
+
+
